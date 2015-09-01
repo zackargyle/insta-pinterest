@@ -1,0 +1,8 @@
+{
+  "name": "Insta-Pinterest",
+  "description": "A client for saving your Instagram posts to Pinterest",
+  "repository": "https://github.com/zackargyle/insta-pinterest",
+  "logo": "http://thefutureofink.com/wp-content/uploads/2014/02/official-pinterest-logo-tile-300x300.png",
+  "keywords": ["Pinterest", "Instagram", "api", "sdk"],
+  "image": "heroku/nodejs"
+}
