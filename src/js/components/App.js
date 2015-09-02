@@ -3,6 +3,7 @@ var {RouteHandler} = require('react-router');
 var router = require('../main');
 
 require('../../scss/App.scss');
+require('../../scss/mobile.scss');
 
 /*
  *  Base App Component for Redirect Handling

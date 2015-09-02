@@ -1,9 +1,6 @@
-var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', __dirname + '/src');
 app.set('view engine', 'jade');
 

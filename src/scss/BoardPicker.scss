@@ -29,10 +29,10 @@ $igImage: 290px;
             display: inline-block;
             vertical-align: top;
             width: 50%;
+        }
 
-            &.imageWrapper {
-                width: 47%
-            }
+        .imageWrapper {
+            width: 47%
         }
 
         .postImage, .boards {
