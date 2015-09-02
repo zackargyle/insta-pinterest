@@ -48,7 +48,7 @@ module.exports = class HomeFeed extends React.Component {
      *  @param {Event}  e    - DOM event object
      */
     showBoardPicker(post, e) {
-        if (post || e.target.className === 'BoardPicker') {
+        if (post || e.target.className === 'BoardPicker' || e.target.className === 'close') {
             this.setState({ selectedPost: post });
         }
     }

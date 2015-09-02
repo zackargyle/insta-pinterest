@@ -23,6 +23,11 @@ $igImage: 290px;
         header {
             font-size: 25px;
             margin-bottom: 15px;
+            position: relative;
+        }
+
+        .close {
+            display: none;
         }
 
         .inline {
@@ -42,7 +47,7 @@ $igImage: 290px;
         .boards {
             background-color: #fff;
             overflow: scroll;
-            max-height: $igImage + 94;
+            height: $igImage + 90;
         }
 
         .board {

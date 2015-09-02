@@ -80,7 +80,9 @@ module.exports = class BoardPicker extends React.Component {
         return (
             <div className="BoardPicker" onClick={this.props.close}>
                 <div className="content">
-                    <header>Pick a Board</header>
+                    <header>Pick a Board
+                        <div className="close" onClick={this.props.close}>&#10005;</div>
+                    </header>
                     { this._render('LeftSide') }
                     { this._render('Boards', this.props.boards) }
                 </div>
