@@ -1,4 +1,6 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+var precss      = require('precss');
 
 function getEntrySources(sources) {
     if (process.env.NODE_ENV !== 'production') {
@@ -24,9 +26,12 @@ module.exports = {
                 exclude: /node_modules/
             },{
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('css!sass')
+                loader: ExtractTextPlugin.extract("style-loader", "css!postcss-loader!sass")
             }
         ]
+    },
+    postcss: function () {
+        return [autoprefixer, precss];
     },
     plugins: [
         new ExtractTextPlugin('dist/style.css', {
