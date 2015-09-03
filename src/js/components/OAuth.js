@@ -6,7 +6,7 @@ require('../../scss/Login.scss');
 /*
  *  Oauth Redirect View Component
  */
-module.exports = class OAuth extends React.Component {
+class OAuth extends React.Component {
 
     constructor() {
         super();
@@ -27,3 +27,5 @@ module.exports = class OAuth extends React.Component {
     }
 
 }
+
+module.exports = OAuth;

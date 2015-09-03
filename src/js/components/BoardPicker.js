@@ -9,7 +9,7 @@ require('../../scss/BoardPicker.scss');
  *  @state {String}   saving  - the board id used for creating a new Pin
  *  @state {String}   note    - the description of the Pin
  */
-module.exports = class BoardPicker extends React.Component {
+class BoardPicker extends React.Component {
 
     constructor(props) {
         super(props);
@@ -26,19 +26,11 @@ module.exports = class BoardPicker extends React.Component {
     pinit(board) {
         this.props.postPin({
             board: board.id,
-            note: this.state.note,
+            note: this.refs.note.getDOMNode().value,
             link: this.props.post.link,
             image_url: this.props.post.images.standard_resolution.url
         });
         this.setState({ saving: board.id });
-    }
-
-    /*
-     *  Update the textarea with the new value by storing it in state
-     */
-    update() {
-        if (!this.noteEl) this.noteEl = this.refs.note.getDOMNode();
-        this.setState({ note: this.noteEl.value });
     }
 
     /*
@@ -52,7 +44,7 @@ module.exports = class BoardPicker extends React.Component {
                 return (
                     <div className="inline imageWrapper">
                         <img className="postImage" src={this.props.post.images.standard_resolution.url} width="290" height="290"/>
-                        <textarea ref="note" className="note" onChange={this.update.bind(this)} value={this.state.note}></textarea>
+                        <textarea ref="note" className="note" defaultValue={this.state.note}></textarea>
                     </div>
                 );
             case 'Boards':
@@ -64,7 +56,7 @@ module.exports = class BoardPicker extends React.Component {
             case 'Board':
                 var image = data.image.small;
                 return (
-                    <div className="board">
+                    <div className="board" key={data.id}>
                         <img src={image.url} width={image.width} height={image.height} />
                         <span>{data.name}</span>
                         { this.state.saving === data.id ? <Spinner /> : <button className="button button--pinit" onClick={this.pinit.bind(this, data)}>Pin it!</button> }
@@ -91,3 +83,5 @@ module.exports = class BoardPicker extends React.Component {
     }
 
 }
+
+module.exports = BoardPicker;

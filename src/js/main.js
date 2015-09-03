@@ -28,5 +28,3 @@ var router = Router.create({
 router.run((Root) => {
     React.render(<Root/>, document.getElementById('content'));
 });
-
-module.exports = router;

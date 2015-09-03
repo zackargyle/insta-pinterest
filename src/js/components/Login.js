@@ -7,20 +7,25 @@ require('../../scss/Login.scss');
 
 /*
  *  Login View Component
- *  @prop  {Function} onAuth    - parent method for redirect
  *  @state {Boolean}  instagram - auth state of Instagram
  *  @state {Boolean}  pinterest - auth state of Pinterest
  */
-module.exports = class Login extends React.Component {
+class Login extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             instagram: Instagram.loggedIn(),
             pinterest: Pinterest.loggedIn()
         };
+    }
+
+    /*
+     *  Reroute if already logged in to both
+     */
+    componentDidMount() {
         if (this.state.instagram && this.state.pinterest) {
-            this.props.onAuth();
+            this.context.router.transitionTo('feed');
         }
     }
 
@@ -34,7 +39,7 @@ module.exports = class Login extends React.Component {
         };
 
         if (state.instagram && state.pinterest) {
-            this.props.onAuth();
+            this.context.router.transitionTo('feed');
         } else {
             this.setState(state);
         }
@@ -102,3 +107,9 @@ module.exports = class Login extends React.Component {
     }
 
 }
+
+Login.contextTypes = {
+    router: React.PropTypes.func.isRequired
+};
+
+module.exports = Login;

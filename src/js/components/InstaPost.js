@@ -7,7 +7,7 @@ require('../../scss/InstaPost.scss');
  *  @prop {Function} boardPicker - parent method for opening board picker
  *  @prop {Object}   post        - Instagram Post
  */
-module.exports = class InstaPost extends React.Component {
+class InstaPost extends React.Component {
     /*
      *  Return JSX representation of component view
      */
@@ -27,3 +27,5 @@ module.exports = class InstaPost extends React.Component {
     }
 
 }
+
+module.exports = InstaPost;

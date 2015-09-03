@@ -1,6 +1,5 @@
 var React = require('react');
 var {RouteHandler} = require('react-router');
-var router = require('../main');
 
 require('../../scss/App.scss');
 require('../../scss/mobile.scss');
@@ -8,31 +7,13 @@ require('../../scss/mobile.scss');
 /*
  *  Base App Component for Redirect Handling
  */
-module.exports = class App extends React.Component {
-
-    /*
-     *  Reroute to login page on logout, or auth-required routes
-     */
-    onAuthRequired() {
-        window.location.href = '/';
-    }
-
-    /*
-     *  Reroute to HomeFeed on successful authentication
-     */
-    onAuth() {
-        window.location.href = 'feed';
-    }
-
+class App extends React.Component {
     /*
      *  Return JSX representation of component view
      */
     render () {
-        return (
-            <div>
-                <RouteHandler onAuth={this.onAuth} onAuthRequired={this.onAuthRequired}/>
-            </div>
-        );
+        return <RouteHandler/>;
     }
-
 }
+
+module.exports = App;

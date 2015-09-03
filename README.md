@@ -5,5 +5,9 @@ A client for saving Instagram posts to Pinterest.
 
 ## There are two ways to run it, dev and build
 
-dev: gulp watch
-build: gulp build && node server.js
+Dev: takes two tabs
+1. npm run dev
+2. node server.js
+
+Prod:
+1. npm run prod

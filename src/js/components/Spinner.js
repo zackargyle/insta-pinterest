@@ -5,7 +5,7 @@ require('../../scss/Spinner.scss');
  *  Spinning Loader View Component
  *  @prop {String} ClassName - optional size
  */
-module.exports = class Login extends React.Component {
+class Spinner extends React.Component {
     /*
      *  Return JSX representation of component view
      */
@@ -22,3 +22,5 @@ module.exports = class Login extends React.Component {
         );
     }
 }
+
+module.exports = Spinner;

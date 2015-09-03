@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zackargyle/pinstagram"
+    "url": "https://github.com/zackargyle/insta-pinterest"
   },
   "scripts": {
     "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --progress --colors",
@@ -13,7 +13,7 @@
   },
   "author": "Zack Argyle",
   "license": "MIT",
-  "homepage": "https://github.com/Granze/react-starterify",
+  "homepage": "http://insta-pinterest.herokuapp.com",
   "engines": {
     "node": "0.12.2"
   },

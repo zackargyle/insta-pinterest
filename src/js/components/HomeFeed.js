@@ -15,22 +15,29 @@ require('../../scss/HomeFeed.scss');
  *  @state {Array}    posts          - list of remote Instagram posts
  *  @state {Object}   selectedPost   - currently selected post object
  */
-module.exports = class HomeFeed extends React.Component {
+class HomeFeed extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { posts: [] };
-        if (!Instagram.loggedIn() || !Pinterest.loggedIn()) {
-            return props.onAuthRequired();
-        }
+    constructor(props, context) {
+        super(props, context);
+        this.state = { posts: [], boards: [] };
     }
 
     /*
      *  Fetch remote data from Instagram and Pinterest
      */
     componentDidMount() {
+        if (!Instagram.loggedIn() || !Pinterest.loggedIn()) {
+            return this.context.router.transitionTo('login');
+        }
         this.fetchFeedData();
         this.fetchBoardData();
+    }
+
+    /*
+     *  Set feed scroll status on update
+     */
+    componentDidUpdate() {
+        document.body.classList.toggle('noscroll', !!this.state.selectedPost);
     }
 
     /*
@@ -39,7 +46,7 @@ module.exports = class HomeFeed extends React.Component {
     logout() {
         Pinterest.logout();
         Instagram.logout();
-        this.props.onAuthRequired();
+        this.context.router.transitionTo('login');
     }
 
     /*
@@ -75,7 +82,7 @@ module.exports = class HomeFeed extends React.Component {
      */
     fetchBoardData() {
         Pinterest.myBoards(response => {
-            this.boards = response.data.sort((a,b) => a.name > b.name ? 1 : -1);
+            this.setState({ boards: response.data.sort((a,b) => a.name > b.name ? 1 : -1) });
         });
     }
 
@@ -104,10 +111,10 @@ module.exports = class HomeFeed extends React.Component {
             case 'LoadMore':
                 return <div className="load-more" onClick={this.loadMore.bind(this)}>LOAD MORE</div>;
             case 'BoardPicker':
-                return <BoardPicker boards={this.boards} post={this.state.selectedPost} postPin={this.postPin.bind(this)} close={this.showBoardPicker.bind(this, null)}/>;
+                return <BoardPicker boards={this.state.boards} post={this.state.selectedPost} postPin={this.postPin.bind(this)} close={this.showBoardPicker.bind(this, null)}/>;
             case 'InstaPosts':
                 return this.state.posts.map(post => {
-                    return <InstaPost post={post} boardPicker={this.showBoardPicker.bind(this)}/>;
+                    return <InstaPost post={post} key={post.id} boardPicker={this.showBoardPicker.bind(this)}/>;
                 });
             case 'Header':
                 return (
@@ -125,7 +132,6 @@ module.exports = class HomeFeed extends React.Component {
      *  Return JSX representation of component view
      */
     render () {
-        document.body.classList.toggle('noscroll', !!this.state.selectedPost);
         return (
             <div className='HomeFeed'>
                 { !this.state.posts.length ? this._render('Loader') : null }
@@ -138,3 +144,9 @@ module.exports = class HomeFeed extends React.Component {
     }
 
 }
+
+HomeFeed.contextTypes = {
+    router: React.PropTypes.func.isRequired
+};
+
+module.exports = HomeFeed;
